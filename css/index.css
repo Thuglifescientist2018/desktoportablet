@@ -2,7 +2,12 @@ body {
 margin: 0;
 background-color: #2979ab;
 }
+#underconstruction {
+  margin:0;
+  margin-left: 1%;
+}
 h1 {
+  margin-left: -10%;
 padding: 2%;
 text-align: center;
 background: black;
@@ -30,7 +35,7 @@ animation-timing-function: ease-out;
   animation-iteration-count: infinite;
 }
 header {
-  padding-bottom: 30px;
+  padding-bottom: 50px;
   background: grey;
   padding-top: 0px;
 }
@@ -64,4 +69,27 @@ background-color: black;
 color: lightgreen;
 padding: 1%;
 
+}
+
+#game_instruction {
+  color: white;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: sans-serif;
+  margin-top: 10%;
+  background-color: #18ba43;
+
+
+}
+#reset {
+  margin-left: 100px;
+  border: none;
+  color: white;
+  background-color: steelblue;
+  padding: 1%;
+  outline: none;
+}
+#winScore {
+  margin-left: 3%;
 }
