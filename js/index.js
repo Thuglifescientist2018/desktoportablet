@@ -1,67 +1,68 @@
-var coin = document.querySelector("#coin");
 var p1display = document.querySelector("#p1display");
-p1display.textContent = p1score;
 var p2display = document.querySelector("#p2display");
-p2display.textContent = p2score;
-var coinicon = document.querySelector("i");
 var resetButton = document.querySelector("#reset");
-var winScore = 5;
-var icons = ["fa fa-tablet", "fa fa-desktop"];
+var maxScoreInput = document.querySelector("#max");
+var coin = document.querySelector("#coin");
+var coinIcon = document.querySelectorAll("i")[0];
+var game_instruction = document.querySelector("#game_instruction");
 var p1score = 0;
 var p2score = 0;
 var gameover = false;
+var winscore = 5;
+var icons = ["fa fa-desktop", "fa fa-tablet"];
+var coinEvents = ["click", "dblclick"];
 
 
-if(gameover !== true){
+for(i=0; i<coinEvents.length; i++){
+coin.addEventListener(coinEvents[i], function(event){
+  if(!gameover){
+  if(event.type === "click") {
+  this.style.animationName = 'toss';
+  coinIcon.setAttribute("class", "fa fa-chevron-down");
+  coinIcon.style.animationName = "toss";
 
-coin.addEventListener("click", function(){
-
-  coinicon.setAttribute("class", "fa fa-angle-double-down");
-  this.style.animationName = "toss";
-});
-coin.addEventListener("dblclick", function(){
-  var randicon = Math.floor(Math.random()*icons.length)
+}else if(event.type = "dblclick") {
+  var randomIcon = Math.floor(Math.random()*icons.length);
   this.style.animationName = "";
-  coinicon.setAttribute("class", icons[randicon]);
-  var coiniconselect = coinicon.getAttribute("class");
-  if(coiniconselect === icons[0]) {
-    if(p1score === winScore || p2score === winScore){
-      console.log("Game Over");
-      gameover = true;
-    }else{
+  coinIcon.setAttribute("class", icons[randomIcon]);
+  if(coinIcon.getAttribute("class") === icons[0]){
     p1score ++;
-
     p1display.textContent = p1score;
-  }
-  }
-  else if(coiniconselect === icons[1]) {
-    if(p1score === winScore || p2score === winScore){
-      console.log("Game Over");
+    if(p1score === winscore){
+      var x = document.createElement("div");
+      x.setAttribute("class", "splashscreen")
+      x.classList.add("splashscreen");
+      document.body.appendChild(x);
+      var congrats = document.createElement("h1");
+      congrats.setAttribute("class", "congrats");
+      congrats.innerHTML = "Congrats <i class='fa fa-desktop'></i>" ;
+      var xel = document.querySelector(".splashscreen");
+      xel.appendChild(congrats);
       gameover = true;
-
-
-    }else {
+    }
+  }else if(coinIcon.getAttribute("class") === icons[1]){
     p2score ++;
-
-
     p2display.textContent = p2score;
+    if(p2score === winscore){
+      var x = document.createElement("div");
+      x.setAttribute("class", "splashscreen")
+      x.classList.add("splashscreen");
+      document.body.appendChild(x);
+      var congrats = document.createElement("h1");
+      congrats.setAttribute("class", "congrats");
+      congrats.innerHTML = "Congrats   <i class='fa fa-tablet'></i>" ;
+      var xel = document.querySelector(".splashscreen");
+      xel.appendChild(congrats);
+      gameover = true;
+    }
   }
-  }
-
-})
-
-
 }
-
-
-
-
-
+}})};
 resetButton.addEventListener("click", function(){
-  coinicon.removeAttribute("class");
   p1score = 0;
   p2score = 0;
   p1display.textContent = p1score;
   p2display.textContent = p2score;
-
+  coinIcon.removeAttribute("class");
+  gameover = false;
 })
